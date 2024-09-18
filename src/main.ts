@@ -1,6 +1,53 @@
+import { routes } from './app/app.routes';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
+import { platformBrowserDynamic} from '@angular/platform-browser-dynamic';
+import { RouterModule, Routes } from '@angular/router';
 import { bootstrapApplication } from '@angular/platform-browser';
-import { appConfig } from './app/app.config';
-import { AppComponent } from './app/app.component';
+import { provideRouter } from '@angular/router';
 
-bootstrapApplication(AppComponent, appConfig)
-  .catch((err) => console.error(err));
+
+import { AppComponent } from './app/app.component';
+import { LoginComponent } from './app/domains/login/login.component';
+import { HomeComponent } from './app/domains/home/home.component';
+import { RegisterComponent } from './app/domains/register/register.component';
+import { ProfileComponent } from './app/domains/profile/profile.component';
+
+
+@NgModule({
+declarations: [
+  LoginComponent,
+  HomeComponent,
+  RegisterComponent,
+  ProfileComponent,
+  AppComponent
+ 
+], 
+imports:[
+  CommonModule,
+  BrowserModule,
+  BrowserAnimationsModule,
+  ReactiveFormsModule,
+  RouterModule.forRoot(routes),
+  HttpClientModule
+],
+
+providers: [],
+
+exports:[
+
+],
+bootstrap: [AppComponent]
+
+})
+
+
+export class AppModule { }
+
+platformBrowserDynamic().bootstrapModule(AppModule)
+
+  .catch(err => console.error(err));

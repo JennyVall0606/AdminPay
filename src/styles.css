@@ -1,1 +1,24 @@
-/* You can add global styles to this file, and also import other style files */
+
+  
+
+@import "~bootstrap/dist/css/bootstrap.min.css";
+
+ 
+* {
+  box-sizing: border-box;
+  margin: 0;
+}
+ body {
+        background: #0f0c29;
+background: -webkit-linear-gradient(to top, #24243e, #302b63, #0f0c29); 
+background: linear-gradient(to top, #24243e, #302b63, #0f0c29); 
+    } 
+
+
+
+.josefin-sans-uniquifier {
+font-family: "Josefin Sans", sans-serif;
+font-optical-sizing: auto;
+font-weight: weight;
+font-style: normal;
+}
