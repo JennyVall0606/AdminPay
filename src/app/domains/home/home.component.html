@@ -1,1 +1,17 @@
-<p>home works!</p>
+<main>
+  <div class="container">
+    <div class="sidebar">
+      <ul>
+        <li><a (click)="showInfo('payments')">Payments</a></li>
+        <li><a (click)="showInfo('billings')">Billings</a></li>
+        <li><a (click)="showInfo('users')">Users</a></li>
+      </ul>
+    </div>
+    <div class="content">
+      <div *ngIf="selectedInfo">
+        <h2>{{ selectedInfo.title }}</h2>
+        <p>{{ selectedInfo.description }}</p>
+      </div>
+    </div>
+  </div>
+</main>

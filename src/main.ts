@@ -9,7 +9,7 @@ import { platformBrowserDynamic} from '@angular/platform-browser-dynamic';
 import { RouterModule, Routes } from '@angular/router';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { provideRouter } from '@angular/router';
-
+import { ToastrModule, ToastrService } from 'ngx-toastr';
 
 import { AppComponent } from './app/app.component';
 import { LoginComponent } from './app/domains/login/login.component';
@@ -32,6 +32,7 @@ imports:[
   BrowserModule,
   BrowserAnimationsModule,
   ReactiveFormsModule,
+  ToastrModule.forRoot(),
   RouterModule.forRoot(routes),
   HttpClientModule
 ],

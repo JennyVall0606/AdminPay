@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { AuthService } from '../../services/auth.service';
 import { FormControl, FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { AppUser } from '../../models/user.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',  
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
     private userService: UserService,
-    private authService: AuthService
+    private authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -42,9 +44,9 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.userService.login(this.loginForm.value as AppUser).subscribe({
         next: (response: any) => {
-          if (response.token) {
-            this.authService.setToken(response.token);
-            this.router.navigate(['/home']);
+          if (response.success) {
+            this.authService.setAuthenticated(true);  // Usuario autenticado
+            this.router.navigate(['/Dashboard']);
           } else {
             this.formInvalid = true;
             this.errorMessage = 'Credenciales inválidas';
@@ -54,12 +56,6 @@ export class LoginComponent implements OnInit {
           console.error('Error al iniciar sesión:', error);
           this.formInvalid = true;
           this.errorMessage = 'Error al iniciar sesión. Inténtalo de nuevo más tarde.';
-          
-          if (error.status === 401) {
-            this.errorMessage = 'Credenciales inválidas';
-          } else {
-            this.errorMessage = `Error ${error.status}: ${error.message}`;
-          }
         },
       });
     } else {
@@ -67,4 +63,5 @@ export class LoginComponent implements OnInit {
       this.loginForm.markAllAsTouched();
     }
   }
+  
 }

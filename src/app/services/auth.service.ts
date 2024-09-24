@@ -1,34 +1,27 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
-
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-    private tokenKey = 'authToken';
 
-    constructor() { }
-    setToken(token: string): void {
-        localStorage.setItem(this.tokenKey, token);
-      }
-    
-      getToken(): string | null {
-        return localStorage.getItem(this.tokenKey);
-      }
+  private isAuthenticatedKey = 'isAuthenticated';
 
+  constructor() { }
 
-  removeToken() {
-    localStorage.removeItem('user_token');
+  // Establece el estado de autenticación del usuario
+  setAuthenticated(isAuthenticated: boolean): void {
+    localStorage.setItem(this.isAuthenticatedKey, JSON.stringify(isAuthenticated));
   }
 
-  
-
- isAuthenticated(): boolean {
-    return !!this.getToken();
+  // Obtiene el estado de autenticación del usuario
+  isAuthenticated(): boolean {
+    const authState = localStorage.getItem(this.isAuthenticatedKey);
+    return authState ? JSON.parse(authState) : false;
   }
 
+  // Elimina el estado de autenticación, lo que equivaldría a cerrar sesión
   logout(): void {
-    localStorage.removeItem(this.tokenKey);
+    localStorage.removeItem(this.isAuthenticatedKey);
   }
 }
