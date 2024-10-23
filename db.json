@@ -21,5 +21,40 @@
       "email": "jaov669@gmail.com",
       "password": "123456"
     }
+  ],
+  "payments": [
+    {
+      "id": "p1",
+      "amount": "100",
+      "date": "2024-09-01",
+      "status": "Completed",
+      "method": "method1"
+    },
+    {
+      "id": "p2",
+      "amount": "200",
+      "date": "2024-09-02",
+      "status": "Pending",
+      "method": "method2"
+    },
+    {
+      "id": "p3",
+      "amount": "300",
+      "date": "2024-09-03",
+      "status": "Failed",
+      "method": "method3"
+    }
+  ],
+  "billings": [
+    {
+      "id": "b1",
+      "total": 200,
+      "dueDate": "2024-09-30"
+    },
+    {
+      "id": "b2",
+      "total": 300,
+      "dueDate": "2024-10-15"
+    }
   ]
 }

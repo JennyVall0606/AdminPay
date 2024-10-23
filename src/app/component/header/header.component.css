@@ -1,0 +1,34 @@
+
+.logo-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  #logo {
+    max-width: 60px;
+  }
+  
+  .btn-outline-secondary {
+    margin-left: auto;
+  }
+  
+  header {
+     padding: 1rem;
+  }
+  
+    
+
+    .open-sans {
+        font-family: "Open Sans", sans-serif;
+        font-optical-sizing: auto;
+        font-weight: 10;
+        font-style: normal;
+        font-variation-settings:
+          "wdth" 100;
+         
+      }
+ 
+  
+  header .btn {
+    font-size: 0.9rem;
+     }
