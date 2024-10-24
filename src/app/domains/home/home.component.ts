@@ -30,6 +30,9 @@ export class HomeComponent implements OnInit {
     phone: ''
   };
   
+  showPaymentsTable: boolean = false;
+  showBillingsTable: boolean = false;
+
 
   translations = {
     en: {
@@ -134,18 +137,22 @@ export class HomeComponent implements OnInit {
 
 
   showInfo(section: string) {
+
+    this.showPaymentsTable = false; // Oculta la tabla de pagos
+    this.showBillingsTable = false;
     
     if (section === 'payments') {
       this.selectedInfo = {
         title: this.translations[this.language].payments,
         data: this.payments
       };
-      this.selectedPayment = []; 
+     
     } else if (section === 'billings') {
       this.selectedInfo = {
         title: this.translations[this.language].billings,
         data: this.billings
       };
+     
     } else if (section === 'users') {
       this.selectedInfo = {
         title: this.translations[this.language].users,
@@ -170,13 +177,14 @@ export class HomeComponent implements OnInit {
     }
 
     
-    if (this.selectedPayment.length > 0) {
+    this.showPaymentsTable = this.selectedPayment.length > 0; 
+    this.showBillingsTable = this.selectedPayment.length > 0; 
+    if (this.showPaymentsTable) {
       this.selectedInfo = {
         title: this.translations[this.language].payments,
         description: '', 
       };
     } else {
-      
       this.selectedInfo = null;
     }
   }
