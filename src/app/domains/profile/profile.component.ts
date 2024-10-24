@@ -8,7 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 })
 export class ProfileComponent implements OnInit {
   profileForm: FormGroup;
-  profileImage: string | ArrayBuffer | null = null; // Para mostrar la imagen seleccionada
+  profileImage: string | ArrayBuffer | null = null; 
 
   constructor(private fb: FormBuilder) {
     this.profileForm = this.fb.group({
@@ -25,7 +25,7 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // Cargar los datos del usuario
+   
     this.profileForm.patchValue({
       nombre: 'Juan',
       apellido: 'Pérez',

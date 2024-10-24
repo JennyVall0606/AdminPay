@@ -5,21 +5,27 @@
       "firstname": "prueba",
       "lastname": "prueba",
       "email": "prueba@correo.com",
-      "password": "123456"
+      "password": "123456",
+      "address": "Calle Falsa 123",
+      "phone": "1234567890"
     },
     {
       "id": "10af",
       "firstname": "prueba",
       "lastname": "prueba",
       "email": "prueba2@correo.com",
-      "password": "123456"
+      "password": "123456",
+      "address": "Calle Falsa 123",
+      "phone": "1234567890"
     },
     {
       "id": "51fc",
       "firstname": "Jenny",
       "lastname": "Vallejos",
       "email": "jaov669@gmail.com",
-      "password": "123456"
+      "password": "123456",
+      "address": "Calle Falsa 123",
+      "phone": "1234567890"
     }
   ],
   "payments": [

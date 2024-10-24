@@ -11,12 +11,14 @@ export class HomeComponent implements OnInit {
   users: any[] = [];
   payments: any[] = [];
   billings: any[] = [];
-  selectedPayment: any[] = []; // Para almacenar detalles del pago seleccionado
+  selectedPayment: any[] = []; 
 
   language: 'en' | 'es' = 'es'; 
   
+  loggedInUserId: string = '51fc';
 
   profile = {
+    id: '',
     firstname: '',
     lastname: '',
     email: '',
@@ -24,8 +26,10 @@ export class HomeComponent implements OnInit {
     address: '',
     city: '',
     postalCode: '',
-    country: ''
+    country: '',
+    phone: ''
   };
+  
 
   translations = {
     en: {
@@ -78,8 +82,7 @@ export class HomeComponent implements OnInit {
     }
   };
   
-  
-  
+
 
   constructor(private http: HttpClient) {}
 
@@ -87,12 +90,13 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.fetchData();
-    this.showInfo('profile');
+   
   }
 
   fetchData() {
     this.http.get<any[]>('http://localhost:3000/users').subscribe(data => {
       this.users = data;
+      this.loadUserProfile();
     });
 
     this.http.get<any[]>('http://localhost:3000/payments').subscribe(data => {
@@ -104,6 +108,25 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  loadUserProfile() {
+    const user = this.users.find(u => u.id === this.loggedInUserId);
+    if (user) {
+      this.profile = {
+        id: user.id,
+        firstname: user.firstname,
+        lastname: user.lastname,
+        email: user.email,
+        birthday: user.birthday,
+        address: user.address,
+        city: user.city || '',  // Puedes agregar más campos si es necesario
+        postalCode: user.postalCode || '',
+        country: user.country || '',
+        phone: user.phone || ''
+      };
+    }
+  }
+  
+  
   changeLanguage(lang: 'en' | 'es') {
     this.language = lang;
     this.showInfo('profile'); 
@@ -117,7 +140,7 @@ export class HomeComponent implements OnInit {
         title: this.translations[this.language].payments,
         data: this.payments
       };
-      this.selectedPayment = []; // Resetear detalles al cambiar de sección
+      this.selectedPayment = []; 
     } else if (section === 'billings') {
       this.selectedInfo = {
         title: this.translations[this.language].billings,
@@ -137,7 +160,7 @@ export class HomeComponent implements OnInit {
   }
   
   showPaymentDetails(method: number) {
-    // Filtrar pagos según el método seleccionado
+  
     if (method === 1) {
       this.selectedPayment = this.payments.filter(payment => payment.method === 'method1');
     } else if (method === 2) {
@@ -146,29 +169,37 @@ export class HomeComponent implements OnInit {
       this.selectedPayment = this.payments.filter(payment => payment.method === 'method3');
     }
 
-    // Solo mostrar la información de pagos si hay elementos seleccionados
+    
     if (this.selectedPayment.length > 0) {
       this.selectedInfo = {
         title: this.translations[this.language].payments,
-        description: '', // O cualquier otra descripción que desees
+        description: '', 
       };
     } else {
-      // Si no hay pagos, se restablece la información seleccionada
+      
       this.selectedInfo = null;
     }
   }
   onFileSelected(event: any) {
     const file = event.target.files[0];
     if (file) {
-      // Aquí puedes manejar la lógica para cargar o procesar la imagen
+      
       console.log('File selected:', file);
     }
   }
 
   saveChanges() {
-    // Aquí puedes implementar la lógica para guardar los cambios del perfil del usuario
-    console.log('Changes saved for profile:', this.profile);
+    const url = `http://localhost:3000/users/${this.profile.id}`; // URL para actualizar el usuario
+
+    // Usar el método PATCH para simular la actualización parcial del perfil
+    this.http.patch(url, this.profile).subscribe(response => {
+      console.log('Perfil actualizado:', response);
+      alert('Los cambios se han guardado exitosamente.');
+    }, error => {
+      console.error('Error al guardar los cambios:', error);
+      alert('Ocurrió un error al guardar los cambios.');
+    });
   }
-  
-  
 }
+  
+  

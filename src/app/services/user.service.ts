@@ -41,7 +41,7 @@ export class UserService {
   }
 
   getUsers(): Observable<AppUser[]> {
-    return this.http.get<AppUser[]>(`${this.apiUrl}/users`) // Corregido
+    return this.http.get<AppUser[]>(`${this.apiUrl}/users`)
       .pipe(
         catchError((error: any) => {
           console.error('Error fetching users:', error);
